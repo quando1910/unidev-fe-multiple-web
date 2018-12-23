@@ -1,10 +1,8 @@
 <template>
   <div v-loading="loading">
     <app-header></app-header>
-
     <!-- Left side column. contains the sidebar -->
     <app-sidebar></app-sidebar>
-
     <!-- Content Wrapper. Contains page content -->
     <transition name="el-zoom-in-top">
       <div class="content-wrapper">

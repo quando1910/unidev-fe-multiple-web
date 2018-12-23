@@ -79,6 +79,7 @@
           .then(response => {
             if (response.status === 200) {
               localStorage.setItem('ACCESS_TOKEN', response.body.access_token)
+              console.log(123123, response.body.access_token)
               localStorage.setItem('TEAM_ID', response.body.team)
               this.$http.headers.common['Authorization'] = `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`
               window.location.href = '/'

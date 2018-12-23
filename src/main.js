@@ -5,12 +5,14 @@ import VueRouter from 'vue-router'
 import Bars from 'vuebars'
 import vueEventCalendar from 'vue-event-calendar'
 import routes from './routes'
-import store from './store'
+import store from './store/store'
 import VueAnimateNumber from 'vue-animate-number'
 import VueGmaps from 'vue-gmaps'
 import VueLayers from 'vuelayers'
 import VCharts from 'v-charts'
 import filter from './helper/filter'
+import VueI18n from 'vue-i18n'
+import i18n from './locales/config'
 import GlobalComponents from './GlobalComponent.js'
 
 var jwtDecode = require('jwt-decode')
@@ -31,6 +33,7 @@ Vue.use(VueGmaps, {
 Vue.use(VueLayers)
 Vue.use(VCharts)
 Vue.use(GlobalComponents)
+Vue.use(VueI18n)
 
 // Import top level component
 import App from './App.vue'
@@ -40,11 +43,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'material-design-icons/iconfont/material-icons.css'
 import 'dripicons/webfont/webfont.css'
-import lang from 'element-ui/lib/locale/lang/en'
-import locale from 'element-ui/lib/locale'
 import 'vuelayers/lib/style.css'
-
-locale.use(lang)
 
 // Routing logic
 var router = new VueRouter({
@@ -106,7 +105,8 @@ new Vue({
   el: '#app',
   router: router,
   filter,
-  store: store,
+  i18n,
+  store,
   render: h => h(App)
 })
 

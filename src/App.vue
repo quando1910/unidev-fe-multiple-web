@@ -5,14 +5,16 @@
 </template>
 
 <script>
-import store from './store'
-
 export default {
   name: 'App',
-  created () {
-    this.$http.get('api/users/me').then(res => {
-      store.commit('SET_USER', res.body)
-    })
+  mounted () {
+    if (localStorage.getItem('ACCESS_TOKEN')) {
+      this.$http.get('api/users/me').then(res => {
+        this.$store.commit('SET_USER', res.body)
+        this.$store.commit('SET_ROLE', res.body.role)
+        this.$store.commit('SET_UID', res.body.email)
+      })
+    }
   }
 }
 </script>

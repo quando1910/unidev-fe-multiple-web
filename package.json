@@ -30,6 +30,7 @@
     "vue-avatar": "2.0.0",
     "vue-event-calendar": "^1.4.8",
     "vue-gmaps": "^0.2.2",
+    "vue-i18n": "^8.5.0",
     "vue-resource": "^1.0.3",
     "vue-router": "^2.0.2",
     "vue2-editor": "^2.0.26",

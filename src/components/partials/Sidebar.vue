@@ -16,10 +16,10 @@
           <img class="bg-user" src="" alt="User Image"> 
         </div>
         <ul class="sidebar-menu">
-          <li class="header">Admin Tools</li>
+          <li class="header">Công cụ website</li>
           <li class="treeview">
             <a href="#"> <i class="ti-desktop"></i> 
-              <span>Dashboard</span> 
+              <span>Trang chủ</span> 
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span> 
@@ -34,13 +34,13 @@
             </ul>
           </li>
           <li>
-            <router-link to="/calendar"> <i class="ti-calendar"></i> <span>Calendar Apps</span> </router-link>
+            <router-link to="/pictures"> <i class="ti-image"></i> <span class="capitalize-text">{{$t('lang.picManager')}}</span> </router-link>
           </li>
           <li>
-            <router-link to="/packages"> <i class="ti-calendar"></i> <span>Packages</span> </router-link>
+            <router-link to="/articles"> <i class="ti-pencil-alt"></i> <span class="capitalize-text">{{$t('lang.articleManager')}}</span> </router-link>
           </li>
           <li>
-            <router-link to="/cities"> <i class="ti-calendar"></i> <span>Cities & Colleges</span> </router-link>
+            <router-link to="/videos"> <i class="ti-video-camera"></i> <span class="capitalize-text">{{$t('lang.videoManager')}}</span> </router-link>
           </li>
           <li class="header">PHOTO tools</li>
           <li>
@@ -68,7 +68,7 @@
                 {{type.name}}
               </router-link>
             </li>
-            <li class="header" v-if="$store.state.role == 0" >Team Tool</li>
+            <li class="header" v-if="this.role == 0" >Team Tool</li>
             <li class="treeview">
                 <a href="#"> 
                   <i class="ti-write"></i> 
@@ -142,6 +142,8 @@
   </aside>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'DashboardSidebar',
   data () {
@@ -160,12 +162,9 @@ export default {
       })
     })
   },
-  created () {
-    this.$http.get('api/productTypes').then(res => {
-      this.types = res.body
-    })
-    this.$http.get('api/users/me').then(res => {
-      this.me = res.body
+  computed: {
+    ...mapGetters({
+      role: 'role'
     })
   }
 }
