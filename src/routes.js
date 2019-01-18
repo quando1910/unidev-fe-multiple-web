@@ -9,7 +9,12 @@ import Videos from './components/modules/videos/Videos.vue'
 import VideoDetail from './components/modules/videos/VideoDetail.vue'
 
 import Articles from './components/modules/articles/Articles.vue'
-import ArticleDetial from './components/modules/articles/ArticleDetail.vue'
+import ArticleDetail from './components/modules/articles/ArticleDetail.vue'
+import Categories from './components/modules/categories/Categories.vue'
+import CategoriesDetail from './components/modules/categories/CategoriesDetail.vue'
+import CategoriesUpdate from './components/modules/categories/CategoriesUpdate.vue'
+import Albums from './components/modules/albums/Albums.vue'
+import AlbumDetail from './components/modules/albums/AlbumDetail.vue'
 
 // Routes
 const routes = [
@@ -47,9 +52,13 @@ const routes = [
         name: 'articles',
         component: Articles
       }, {
-        path: '/articles/:id',
+        path: '/articles/new',
+        name: 'articleAdd',
+        component: ArticleDetail
+      }, {
+        path: '/articles/:id/update',
         name: 'articleDetail',
-        component: ArticleDetial
+        component: ArticleDetail
       }, {
         // Videos Routes
         path: '/videos',
@@ -59,6 +68,33 @@ const routes = [
         path: '/videos/:id',
         name: 'videoDetail',
         component: VideoDetail
+      }, {
+        path: '/albums',
+        name: 'albums',
+        component: Albums
+      }, {
+        path: '/albums/new',
+        name: 'albumAdd',
+        component: AlbumDetail
+      }, {
+        name: 'albumDetail',
+        path: '/albums/:id/update',
+        component: AlbumDetail
+      }, {
+        path: '/categories',
+        name: 'categories',
+        component: Categories
+      }, {
+        path: '/categories/:name',
+        name: 'categoriesDetail',
+        component: CategoriesDetail,
+        children: [
+          {
+            path: ':id/update',
+            name: 'categoriesUpdate',
+            component: CategoriesUpdate
+          }
+        ]
       }
     ]
   }

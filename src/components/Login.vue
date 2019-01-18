@@ -75,7 +75,7 @@
         })
       },
       submitLogin () {
-        this.$http.post('api/auth', this.loginInfo)
+        this.$http.post('api/auths', this.loginInfo)
           .then(response => {
             if (response.status === 200) {
               localStorage.setItem('ACCESS_TOKEN', response.body.access_token)

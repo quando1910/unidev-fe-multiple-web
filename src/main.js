@@ -40,10 +40,10 @@ import App from './App.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 //  for element 1.9.9 below
 // import 'element-ui/lib/theme-default/index.css'
-import 'element-ui/lib/theme-chalk/index.css'
 import 'material-design-icons/iconfont/material-icons.css'
 import 'dripicons/webfont/webfont.css'
 import 'vuelayers/lib/style.css'
+import 'element-ui/lib/theme-chalk/index.css'
 
 // Routing logic
 var router = new VueRouter({
@@ -68,6 +68,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth === false) {
     if (store.state.token) {
       Vue.http.get('api/checkLogin').then(res => {
+        console.log(res.body)
         next({path: '/'})
       })
         .catch(function (e) {

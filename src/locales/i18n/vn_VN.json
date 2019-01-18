@@ -1,5 +1,76 @@
 { 
-  "picManager": "Quản lý hình ảnh",
-  "articleManager": "Quản lý Bài viết",
-  "videoManager": "Quản lý video"
+  "button": {
+    "create": "Tạo mới",
+    "reset": "Reset",
+    "update": "Cập nhật",
+    "cancel": "Hủy bỏ"
+  },
+  "picManager": "hình ảnh",
+  "albumManager": "album",
+  "picUpload": "Upload Hình ảnh",
+  "picList": "Danh sách Hình ảnh",
+  "articleManager": "Bài viết",
+  "articleList": "Danh sách bài viết",
+  "albumList": "Danh sách Album",
+  "albumCreate": "Tạo Album ảnh",
+  "articleCreate": "Tạo bài viết",
+  "articleCreateDesc": "Hãy nhập bài viết phù hợp với lĩnh vực bạn muốn",
+  "articleCreateBasic": "Thông tin bài viết cơ bản",
+  "articleCreateAdv": "Thông tin nâng cao",
+  "article": {
+    "name": "Tên bài viết",
+    "desc": "Mô tả bài viết",
+    "cover": "Ảnh bìa",
+    "type": "Loại bài viết",
+    "content": "Nội dung",
+    "keyword": "Từ khóa"
+  },
+  "album": {
+    "name": "Tên album",
+    "desc": "Mô tả album",
+    "cover": "Ảnh bìa",
+    "checkin": "Địa điểm album",
+    "type": "Loại album",
+    "keyword": "Từ khóa"
+  },
+  "picture": {
+    "name": "Tên ảnh",
+    "desc": "Mô tả ảnh",
+    "type": "Loại ảnh"
+  },
+  "articles": {
+   "default": "bài viết",
+   "category": "Quản lý danh mục bài viết",
+   "list": "List danh mục bài viết",
+   "create": "Tạo danh mục bài viết"
+  },
+  "videos": {
+    "default": "video",
+    "category": "Quản lý danh mục video",
+    "list": "List danh mục video",
+    "create": "Tạo danh mục video"
+   },
+  "albums": {
+    "default": "album ảnh",
+    "category": "Quản lý danh mục album ảnh",
+    "list": "List danh mục album",
+    "create": "Tạo danh mục album"
+  },
+  "pictures": {
+    "default": "hình ảnh",
+    "category": "Quản lý danh mục hình ảnh",
+    "list": "List danh mục hình ảnh",
+    "create": "Tạo danh mục hình ảnh"
+  },
+  "catManager": "danh mục",
+  "videoManager": "video",
+  "videoUpload": "Upload Video",
+  "videoList": "Danh sách Video",
+  "videoUploadDesc": "Hãy gắn link videos phù hợp vào ô trống bên dưới, chúng tôi chỉ chấp nhận link từ Yotube hoặc Facebook.",
+  "videoUploadPlaceHodler": "Xin nhập link video vào đây!",
+  "video": {
+    "type": "Loại Video",
+    "title": "Tiêu đề Video",
+    "desc": "Mô tả Video"
+  }
 }

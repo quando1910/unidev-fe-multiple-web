@@ -1,4 +1,4 @@
 module.exports = {
   NODE_ENV: '"production"',
-  SERVER_IP: '"http://178.128.22.245:9999"'
+  SERVER_IP: '"http://api.unidev.vn"'
 }

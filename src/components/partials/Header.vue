@@ -1,8 +1,8 @@
 <template>
-  <header class="main-header">
+  <header v-if="user" class="main-header">
     <router-link to="/dashboard" class="logo">
       <span class="logo-mini"><b> <img src="/static/img/logo.png" alt="User Image"></b></span>
-      <span class="logo-lg"><img src="/static/img/logo.png" alt="User Image">{{this.user.name}}</span> </router-link>
+      <span class="logo-lg"><img src="/static/img/logo.png" alt="User Image">{{user.name}}</span> </router-link>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->

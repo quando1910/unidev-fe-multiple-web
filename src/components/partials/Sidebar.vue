@@ -37,10 +37,16 @@
             <router-link to="/pictures"> <i class="ti-image"></i> <span class="capitalize-text">{{$t('lang.picManager')}}</span> </router-link>
           </li>
           <li>
-            <router-link to="/articles"> <i class="ti-pencil-alt"></i> <span class="capitalize-text">{{$t('lang.articleManager')}}</span> </router-link>
+            <router-link to="/albums"> <i class="ti-image"></i> <span class="capitalize-text">{{$t('lang.albumManager')}}</span> </router-link>
+          </li>
+          <li>
+            <router-link to="/articles"> <i class="ti-image"></i> <span class="capitalize-text">{{$t('lang.articleManager')}}</span> </router-link>
           </li>
           <li>
             <router-link to="/videos"> <i class="ti-video-camera"></i> <span class="capitalize-text">{{$t('lang.videoManager')}}</span> </router-link>
+          </li>
+          <li>
+            <router-link to="/categories"> <i class="ti-video-camera"></i> <span class="capitalize-text">{{$t('lang.catManager')}}</span> </router-link>
           </li>
           <li class="header">PHOTO tools</li>
           <li>
