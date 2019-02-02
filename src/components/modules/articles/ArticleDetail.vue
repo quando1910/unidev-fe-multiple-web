@@ -6,14 +6,14 @@
       <p>{{$t('lang.articleCreateDesc')}}</p>
       <el-col :span="15">
       <h5>{{$t('lang.articleCreateBasic')}}</h5>
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm" status-icon>
         <el-form-item :label="$t('lang.article.name')" prop="title">
           <el-input v-model="ruleForm.title"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('lang.article.desc')" required>
+        <el-form-item :label="$t('lang.article.desc')" required prop="desc">
           <el-input v-model="ruleForm.desc"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('lang.article.cover')" prop="desc">
+        <el-form-item :label="$t('lang.article.cover')" prop="cover">
           <img :src="ruleForm.thumbnail" class="article-preview">
           <el-upload
             action=""
@@ -27,8 +27,8 @@
           </el-upload>
         </el-form-item>
         <h5>{{$t('lang.articleCreateAdv')}}</h5>
-        <el-form-item :label="$t('lang.article.type')" prop="desc">
-          <el-select v-if="options" v-model="ruleForm.type" placeholder="Select">
+        <el-form-item :label="$t('lang.article.type')" prop="type">
+          <el-select v-if="options" v-model="ruleForm.type" placeholder="Loại bài viết">
             <el-option
               v-for="item in options"
               :key="item.id"
@@ -37,7 +37,7 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('lang.article.keyword')" prop="desc">
+        <el-form-item :label="$t('lang.article.keyword')" prop="keyword">
           <el-tag
             :key="tag"
             v-for="tag in ruleForm.keyword"
@@ -58,7 +58,7 @@
           </el-input>
           <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
         </el-form-item>
-        <el-form-item :label="$t('lang.article.content')" prop="desc">
+        <el-form-item :label="$t('lang.article.content')" prop="content">
           <div class="editor">
             <quill-editor v-model="ruleForm.content"
               ref="myQuillEditor"
@@ -67,8 +67,9 @@
           </div>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">{{$t('lang.button.create')}}</el-button>
-          <el-button @click="resetForm('ruleForm')">{{$t('lang.button.cancel')}}</el-button>
+          <el-button type="primary" v-if="!updatePage" @click="submitForm('ruleForm')">{{$t('lang.button.create')}}</el-button>
+          <el-button type="primary" v-if="updatePage" @click="submitForm('ruleForm')">{{$t('lang.button.update')}}</el-button>
+          <el-button @click="$router.push({name: 'articles'})">{{$t('lang.button.cancel')}}</el-button>
         </el-form-item>
       </el-form>
       </el-col>
@@ -77,7 +78,7 @@
 </template>
 
 <script>
-import {quillEditor} from 'vue-quill-editor'
+import { quillEditor } from 'vue-quill-editor'
 export default {
   name: 'ArticleAdd',
   components: {
@@ -85,12 +86,12 @@ export default {
   },
   data () {
     return {
+      updatePage: false,
       inputVisible: false,
       inputValue: '',
       options: null,
       value: '',
       title: '',
-      content: '',
       imageList: [],
       editContent: '',
       editorOption: {
@@ -123,26 +124,22 @@ export default {
       },
       rules: {
         title: [
-          { required: true, message: 'Please input Activity name', trigger: 'blur' },
-          { min: 3, message: 'Length should be min from 3 ', trigger: 'blur' }
-        ],
-        region: [
-          { required: true, message: 'Please select Activity zone', trigger: 'change' }
-        ],
-        date1: [
-          { type: 'date', required: true, message: 'Please pick a date', trigger: 'change' }
-        ],
-        date2: [
-          { type: 'date', required: true, message: 'Please pick a time', trigger: 'change' }
-        ],
-        type: [
-          { type: 'array', required: true, message: 'Please select at least one activity type', trigger: 'change' }
-        ],
-        resource: [
-          { required: true, message: 'Please select activity resource', trigger: 'change' }
+          { required: true, message: 'Bạn chưa nhập Tiêu đề', trigger: 'blur' },
+          { min: 3, message: 'Tiêu đề phải có ít nhất 3 kí tự', trigger: 'blur' }
         ],
         desc: [
-          { required: true, message: 'Please input activity form', trigger: 'blur' }
+          { required: true, message: 'Bạn chưa nhập Mô tả ngắn', trigger: 'blur' },
+          { min: 10, message: 'Mô tả ngắn phải có ít nhất 10 kí tự', trigger: 'blur' }
+        ],
+        type: [
+          { type: 'number', required: true, message: 'Bạn chưa chọn loại bài viết', trigger: 'change' }
+        ],
+        image: [
+          { required: true, message: 'Bạn chưa chọn ảnh', trigger: 'change' }
+        ],
+        content: [
+          { required: true, message: 'Bạn chưa nhập Nội dung', trigger: 'change' },
+          { min: 20, message: 'Nội dung phải có ít nhất 20 kí tự', trigger: 'change' }
         ]
       }
     }
@@ -159,13 +156,15 @@ export default {
         .then(response => {
           if (response.status === 200) {
             this.ruleForm = response.body
+            console.log(this.ruleForm)
+            this.updatePage = true
           }
         })
     }
   },
   mounted () {
     document.getElementsByClassName('ql-image')[0].onclick = () => {
-      this.editContent = this.content
+      this.editContent = this.ruleForm.content
       document.getElementsByClassName('ql-image')[1].onchange = () => {
         this.getLinkImg(event.target.files[0])
       }
@@ -179,16 +178,30 @@ export default {
   methods: {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
-        if (this.$route.params.id) {
-          this.$http.put(`api/articles/${this.$route.params.id}`, this.ruleForm)
-            .then(response => {
-              this.$router.push({name: 'articles'})
-            })
+        if (valid) {
+          if (this.$route.params.id) {
+            this.$http.put(`api/articles/${this.$route.params.id}`, this.ruleForm)
+              .then(response => {
+                this.$router.push({name: 'articles'})
+                this.$notify({
+                  title: 'Success',
+                  message: 'Tạo bài viết thành công!',
+                  type: 'success'
+                })
+              })
+          } else {
+            this.$http.post('api/articles', this.ruleForm)
+              .then(response => {
+                this.$router.push({name: 'articles'})
+              })
+          }
         } else {
-          this.$http.post('api/articles', this.ruleForm)
-            .then(response => {
-              this.$router.push({name: 'articles'})
-            })
+          this.$notify({
+            title: 'Warning',
+            message: 'Nội dung không hợp lệ, Vui lòng sửa lại',
+            type: 'warning'
+          })
+          return false
         }
       })
     },
@@ -218,7 +231,7 @@ export default {
           this.imageList.push(file)
           img.src = this.$options.filters.takeImage(file.path)
           this.editContent += img.outerHTML
-          this.content = this.editContent
+          this.ruleForm.content = this.editContent
         }, function (error) {
           console.log(error)
         })
@@ -257,7 +270,7 @@ export default {
       this.imageList.push(value)
       img.src = this.$options.filters.takeImage(value)
       this.editContent += img.outerHTML
-      this.content = this.editContent
+      this.ruleForm.content = this.editContent
     },
     resizeImg () {
     }

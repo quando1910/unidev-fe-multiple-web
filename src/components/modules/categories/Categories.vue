@@ -1,6 +1,6 @@
 <template>
   <section class="content">
-    <custome-tab>
+    <custom-tab>
       <div class="row">
         <div class="col-md-3" v-if="shows"  v-for="(item, index) of handleCat" :key="index">
           <router-link :to="{ path: item.title}" append>
@@ -27,7 +27,7 @@
           </router-link>
         </div>
       </div>
-    </custome-tab>
+    </custom-tab>
   </section>
 </template>
 

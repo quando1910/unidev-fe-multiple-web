@@ -19,7 +19,7 @@
   "articleCreateAdv": "Thông tin nâng cao",
   "article": {
     "name": "Tên bài viết",
-    "desc": "Mô tả bài viết",
+    "desc": "Mô tả ngắn",
     "cover": "Ảnh bìa",
     "type": "Loại bài viết",
     "content": "Nội dung",
@@ -61,6 +61,12 @@
     "category": "Quản lý danh mục hình ảnh",
     "list": "List danh mục hình ảnh",
     "create": "Tạo danh mục hình ảnh"
+  },
+  "products": {
+    "default": "Mặt Hàng",
+    "category": "Quản lý danh mục của mặt hàng",
+    "list": "List danh mục mặt hàng",
+    "create": "Tạo danh mục mặt hàng"
   },
   "catManager": "danh mục",
   "videoManager": "video",

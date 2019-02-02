@@ -48,72 +48,26 @@
           <li>
             <router-link to="/categories"> <i class="ti-video-camera"></i> <span class="capitalize-text">{{$t('lang.catManager')}}</span> </router-link>
           </li>
-          <li class="header">PHOTO tools</li>
-          <li>
-            <router-link to="/contracts"> <i class="ti-email"></i> <span>Contracts</span> </router-link>
-          </li>
-          <li>
-            <router-link to="/todo"> <i class="ti-write"></i> <span>ToDo Tasks</span> </router-link>
-          </li>
-          <li class="treeview">
-              <a href="#"> <i class="ti-shopping-cart-full"></i> <span>Your Salary</span> <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-              </span> </a>
-              <ul class="treeview-menu">
-                <li>
-                  <router-link to="/shop-home">Income</router-link>
-                </li>
-                <li>
-                  <router-link to="/shop-item">Dept</router-link>
-                </li>
-              </ul>
-            </li>
-            <li class="header">Products Tool</li>
-            <li class="treeview" v-if="types.length > 0" v-for="(type,index) of this.types" :key="index">
-              <router-link :to="{name: 'ProductsList', params: {product: type._id} }">
-                {{type.name}}
-              </router-link>
-            </li>
-            <li class="header" v-if="this.role == 0" >Team Tool</li>
-            <li class="treeview">
-                <a href="#"> 
-                  <i class="ti-write"></i> 
-                  <span>Human Resource</span>
-                  <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                  </span> 
-                </a>
-                <ul class="treeview-menu">
-                  <li>
-                    <router-link to="/department">Department</router-link>
-                  </li>
-                  <li>
-                    <router-link to="/employees">Employee</router-link>
-                  </li>
-                </ul>
+          <li class="header">Quản lý bán hàng</li>
+            <li>
+              <router-link to="/categories/products"> <i class="ti-video-camera"></i> <span class="capitalize-text">Danh mục hàng hóa</span> </router-link>
             </li>
             <li class="treeview">
-              <a href="#"> <i class="ti-bar-chart"></i> <span>Bussiness Analystics</span> <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
+              <a>
+                <i class="ti-bar-chart"></i> 
+                <span>Danh sách mặt hàng</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
                 </span> 
               </a>
               <ul class="treeview-menu">
-                  <li>
-                    <router-link to="/chart/chartjs">
-                        Team Salary</router-link>
-                  </li>
-                  <li>
-                    <router-link to="/chart-bar">
-                        Team Income</router-link>
-                  </li>
-                  <li>
-                    <router-link to="/chart-pie">
-                        Chart Pie</router-link>
-                  </li>
+                <li v-for="(item, index) of typesProduct" :key="index">
+                  <router-link :to="{name: 'categoriesList', params:{name: 'products', key: item.id}}">{{item.key}}</router-link>
+                </li>
               </ul>
             </li>
             <li>
-              <router-link to="/todo"> <i class="ti-write"></i> <span>Product Management</span> </router-link>
+              <router-link to="/categories"> <i class="ti-video-camera"></i> <span class="capitalize-text">Thống kê bán hàng</span> </router-link>
             </li>
             <li class="header palette-Cyan-400 bg">DEVIN VUE 1.2</li>
             <li> 
@@ -155,8 +109,17 @@ export default {
   data () {
     return {
       types: [],
-      me: null
+      me: null,
+      typesProduct: []
     }
+  },
+  created () {
+    this.$http.get('api/categories', { params: {type: 'products'} })
+      .then(response => {
+        if (response.status === 200) {
+          this.typesProduct = response.body
+        }
+      })
   },
   mounted () {
     $(document).ready(function ($) {

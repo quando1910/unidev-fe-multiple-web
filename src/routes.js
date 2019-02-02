@@ -13,8 +13,12 @@ import ArticleDetail from './components/modules/articles/ArticleDetail.vue'
 import Categories from './components/modules/categories/Categories.vue'
 import CategoriesDetail from './components/modules/categories/CategoriesDetail.vue'
 import CategoriesUpdate from './components/modules/categories/CategoriesUpdate.vue'
+import CategoriesList from './components/modules/categories/CategoriesList.vue'
 import Albums from './components/modules/albums/Albums.vue'
 import AlbumDetail from './components/modules/albums/AlbumDetail.vue'
+
+import ProductsList from './components/modules/productManagement/products/ProductsList.vue'
+import ProductsDetail from './components/modules/productManagement/products/ProductsDetails.vue'
 
 // Routes
 const routes = [
@@ -85,6 +89,14 @@ const routes = [
         name: 'categories',
         component: Categories
       }, {
+        path: '/categories/:name/:key/list-items',
+        name: 'categoriesList',
+        component: CategoriesList
+      }, {
+        path: '/categories/:name/:key/list-items/:id/update',
+        name: 'categoriesDetail',
+        component: CategoriesDetail
+      }, {
         path: '/categories/:name',
         name: 'categoriesDetail',
         component: CategoriesDetail,
@@ -95,6 +107,18 @@ const routes = [
             component: CategoriesUpdate
           }
         ]
+      }, {
+        path: '/products/new',
+        name: 'productNew',
+        component: ProductsDetail
+      }, {
+        path: '/products/:product',
+        name: 'productsList',
+        component: ProductsList
+      }, {
+        path: '/products/:product/:id',
+        name: 'products',
+        component: ProductsDetail
       }
     ]
   }
